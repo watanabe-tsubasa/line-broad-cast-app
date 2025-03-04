@@ -34,8 +34,13 @@ export async function handleBroadcast(formData: FormData) {
 
     console.dir('Broadcast response:', data);
     return { success: true };
-  } catch (error: any) {
-    console.error('Error sending broadcast:', error);
-    throw new Error(error.message || '送信に失敗しました');
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error('Error sending broadcast:', error);
+      throw new Error(error.message || '送信に失敗しました');
+    } else {
+      console.error('Error sending broadcast:', error);
+      throw new Error('送信に失敗しました');
+    }
   }
 }
