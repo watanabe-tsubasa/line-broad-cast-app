@@ -23,8 +23,12 @@ function App() {
             toast.success('メッセージが正常に送信されました');
           }
         })
-        .catch((err: any) => {
-          toast.error(err.message || '送信に失敗しました');
+        .catch((err: unknown) => {
+          if(err instanceof Error) {
+            toast.error(err.message || '送信に失敗しました');
+          } else {
+            toast.error('不明なエラーが発生。送信に失敗しました');
+          }
         });
     });
   };
