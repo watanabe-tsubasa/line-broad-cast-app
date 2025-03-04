@@ -7,6 +7,8 @@ export async function handleBroadcast(formData: FormData) {
   const channelAccessToken =
     formData.get('channelAccessToken')?.toString() || '';
 
+  console.log(message);
+  console.log(channelAccessToken);
   if (!message.trim() || !channelAccessToken.trim()) {
     throw new Error('メッセージまたはトークンが空です');
   }

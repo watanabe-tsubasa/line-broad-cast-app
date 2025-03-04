@@ -12,14 +12,14 @@ function App() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     startTransition(() => {
       handleBroadcast(formData)
         .then((result) => {
           if (result?.success) {
             // フォームの内容をリセットしたい場合
-            e.currentTarget.reset();
+            form.reset();
             toast.success('メッセージが正常に送信されました');
           }
         })
